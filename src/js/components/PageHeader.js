@@ -1,4 +1,5 @@
 import classNames from "classnames/dedupe";
+import PropTypes from "prop-types";
 import React from "react";
 
 import PageHeaderActions from "./PageHeaderActions";
@@ -84,10 +85,10 @@ class PageHeader extends React.Component {
   }
 }
 
-const classProps = React.PropTypes.oneOfType([
-  React.PropTypes.array,
-  React.PropTypes.object,
-  React.PropTypes.string
+const classProps = PropTypes.oneOfType([
+  PropTypes.array,
+  PropTypes.object,
+  PropTypes.string
 ]);
 
 PageHeader.defaultProps = {
@@ -97,20 +98,20 @@ PageHeader.defaultProps = {
 };
 
 PageHeader.propTypes = {
-  addButton: React.PropTypes.oneOfType([
-    React.PropTypes.arrayOf(React.PropTypes.object),
-    React.PropTypes.object
+  addButton: PropTypes.oneOfType([
+    PropTypes.arrayOf(PropTypes.object),
+    PropTypes.object
   ]),
-  actions: React.PropTypes.array,
-  breadcrumbs: React.PropTypes.node.isRequired,
-  pageHeaderClassName: classProps,
-  pageHeaderInnerClassName: classProps,
-  pageHeaderSectionPrimaryClassName: classProps,
-  pageHeaderSectionSecondaryClassName: classProps,
-  secondaryContentDetail: React.PropTypes.node,
-  supplementalContent: React.PropTypes.node,
-  tabs: React.PropTypes.array,
-  disabledActions: React.PropTypes.bool,
+  actions: PropTypes.array,
+  breadcrumbs: PropTypes.node.isRequired,
+  className: classProps,
+  innerClassName: classProps,
+  primaryContentClassName: classProps,
+  secondaryContentClassName: classProps,
+  secondaryContentDetail: PropTypes.node,
+  supplementalContent: PropTypes.node,
+  tabs: PropTypes.array,
+  disabledActions: PropTypes.bool,
   pageHeaderContentClassName: classProps,
   pageHeaderActionsPrimaryClassNam: classProps
 };
