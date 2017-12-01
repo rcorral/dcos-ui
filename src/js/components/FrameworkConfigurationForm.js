@@ -5,6 +5,7 @@ import TabButton from "#SRC/js/components/TabButton";
 import TabButtonList from "#SRC/js/components/TabButtonList";
 import Tabs from "#SRC/js/components/Tabs";
 import Util from "#SRC/js/utils/Util";
+import Alert from "#SRC/js/components/Alert";
 import JSONEditor from "#SRC/js/components/JSONEditor";
 import FluidGeminiScrollbar from "#SRC/js/components/FluidGeminiScrollbar";
 import PageHeaderNavigationDropdown
@@ -20,7 +21,8 @@ const METHODS_TO_BIND = [
   "handleFormChange",
   "handleJSONChange",
   "handleBadgeClick",
-  "validate"
+  "validate",
+  "jsonSchemaErrorList"
 ];
 class FrameworkConfigurationForm extends Component {
   constructor(props) {
@@ -215,6 +217,19 @@ class FrameworkConfigurationForm extends Component {
       });
   }
 
+  jsonSchemaErrorList(props) {
+    return (
+      <Alert>
+        JSON Validation Failed
+        <ul>
+          {props.errors.map(error => {
+            return <li>{error.stack}</li>;
+          })}
+        </ul>
+      </Alert>
+    );
+  }
+
   render() {
     const {
       packageDetails,
@@ -276,7 +291,7 @@ class FrameworkConfigurationForm extends Component {
                       fields={{ SchemaField, TitleField }}
                       liveValidate={true}
                       validate={this.validate}
-                      showErrorList={false}
+                      ErrorList={this.jsonSchemaErrorList}
                       transformErrors={this.transformErrors}
                     >
                       <div />

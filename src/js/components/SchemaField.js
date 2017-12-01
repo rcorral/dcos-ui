@@ -338,13 +338,13 @@ class SchemaField extends Component {
           return this.renderSelect(errorMessage, autofocus, this.props);
         }
 
-        if (
-          schema.media &&
-          (schema.media.type === "application/x-region-zone-constraints+json" ||
-            schema.media.type === "application/x-zone-constraints+json")
-        ) {
-          return this.renderPlacement(errorMessage, autofocus, this.props);
-        }
+        // if (
+        //   schema.media &&
+        //   (schema.media.type === "application/x-region-zone-constraints+json" ||
+        //     schema.media.type === "application/x-zone-constraints+json")
+        // ) {
+        //   return this.renderPlacement(errorMessage, autofocus, this.props);
+        // }
 
         return this.renderTextInput(errorMessage, autofocus, this.props);
       case "integer":
