@@ -5,7 +5,7 @@ import { getUnanchoredErrorMessage } from "../utils/ErrorMessageUtil";
 
 const ErrorsAlert = function(props) {
   const { errors, hideTopLevelErrors, pathMapping } = props;
-  let showErrors = errors;
+  let showErrors = [].concat.apply([], errors);
 
   if (hideTopLevelErrors) {
     showErrors = showErrors.filter(function(error) {
