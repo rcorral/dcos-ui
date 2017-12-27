@@ -5,7 +5,7 @@ import ConfigTest from "./Config.test.js";
 var Config = {
   analyticsKey: "51ybGTeFEFU1xo6u10XMDrr6kATFyRyh",
   acsAPIPrefix: "/acs/api/v1",
-  applicationRenderDelay: 1000,
+  applicationRenderDelay: 2000,
   networkingAPIPrefix: "/networking/api/v1",
   cosmosAPIPrefix: "/package",
   secretsAPIPrefix: "/secrets/v1",
