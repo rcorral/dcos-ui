@@ -2,6 +2,7 @@
 import React from "react";
 /* eslint-enable no-unused-vars */
 import Objektiv from "objektiv";
+import { Select, SelectOption } from "reactjs-components";
 
 import { MountService } from "foundation-ui";
 
@@ -9,26 +10,48 @@ import FieldAutofocus from "#SRC/js/components/form/FieldAutofocus";
 import FieldError from "#SRC/js/components/form/FieldError";
 import FieldInput from "#SRC/js/components/form/FieldInput";
 import FieldLabel from "#SRC/js/components/form/FieldLabel";
-import FieldSelect from "#SRC/js/components/form/FieldSelect";
 import FormGroup from "#SRC/js/components/form/FormGroup";
 import FormGroupHeading from "#SRC/js/components/form/FormGroupHeading";
 import FormGroupHeadingContent
   from "#SRC/js/components/form/FormGroupHeadingContent";
 import FormRow from "#SRC/js/components/form/FormRow";
 
+import VolumeDefinitions
+  from "#PLUGINS/services/src/js/constants/VolumeDefinitions";
+
 const errorsLens = Objektiv.attr("container", {}).attr("volumes", []);
+const excludedTypes = ["EPHERMAL"];
 
 function getVolumeTypes(props) {
   return (
-    <FieldSelect name={`volumes.${props.index}.type`} value={props.volume.type}>
-      <option value="">Select...</option>,
-      <option value="HOST">
-        Host Volume
-      </option>,
-      <option value="DSS">DC/OS Storage Service</option>,
-      <option value="PERSISTENT">Persistent Volume</option>,
-      <option value="EXTERNAL">External Volume</option>
-    </FieldSelect>
+    <Select
+      name={`volumes.${props.index}.type`}
+      value={props.volume.type}
+      placeholder="Select ..."
+    >
+      {Object.keys(VolumeDefinitions)
+        .filter(type => !excludedTypes.includes(type))
+        .map((type, index) => {
+          if (type === "EPHEMERAL") {
+            return <noscript />;
+          }
+
+          return (
+            <SelectOption
+              key={index}
+              value={type}
+              label={VolumeDefinitions[type].type}
+            >
+              <span className="dropdown-select-item-title">
+                {VolumeDefinitions[type].name}
+              </span>
+              <span className="dropdown-select-item-description">
+                {VolumeDefinitions[type].description}
+              </span>
+            </SelectOption>
+          );
+        })}
+    </Select>
   );
 }
 
