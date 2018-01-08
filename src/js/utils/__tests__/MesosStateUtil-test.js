@@ -37,7 +37,7 @@ describe("MesosStateUtil", function() {
       });
     });
 
-    it("should assign a isStartedByMarathon flag to all tasks", function() {
+    it("assigns a isStartedByMarathon flag to all tasks", function() {
       const state = {
         frameworks: [
           {
@@ -110,19 +110,19 @@ describe("MesosStateUtil", function() {
       ]
     };
 
-    it("should return the matching framework", function() {
+    it("returns the matching framework", function() {
       expect(MesosStateUtil.getFramework(state, "framework-123").name).toEqual(
         "test-1"
       );
     });
 
-    it('should return the matching "completed" framework', function() {
+    it('returns the matching "completed" framework', function() {
       expect(MesosStateUtil.getFramework(state, "framework-abc").name).toEqual(
         "test-2"
       );
     });
 
-    it("should return nothing if no matching framework was found", function() {
+    it("returns nothing if no matching framework was found", function() {
       expect(MesosStateUtil.getFramework(state, "unknown")).not.toBeDefined();
     });
   });
@@ -147,29 +147,29 @@ describe("MesosStateUtil", function() {
       );
     });
 
-    it("should handle empty object well", function() {
+    it("handles empty object well", function() {
       expect(MesosStateUtil.getTasksFromVirtualNetworkName({}, "foo")).toEqual(
         []
       );
     });
 
-    it("should throw when a null state is provided", function() {
+    it("throws when a null state is provided", function() {
       expect(function() {
         MesosStateUtil.getTasksFromVirtualNetworkName(null, "foo");
       }).toThrow();
     });
 
-    it("should handle empty undefined well", function() {
+    it("handles empty undefined well", function() {
       expect(
         MesosStateUtil.getTasksFromVirtualNetworkName(undefined, "foo")
       ).toEqual([]);
     });
 
-    it("should filter tasks that doesn't have the overlay name", function() {
+    it("filters tasks that doesn't have the overlay name", function() {
       expect(this.instance.length).toEqual(2);
     });
 
-    it("should find tasks from different frameworks", function() {
+    it("finds tasks from different frameworks", function() {
       expect(this.instance).toEqual([
         { container: { network_infos: [{ name: "alpha" }] } },
         { container: { network_infos: [{ name: "alpha" }] } }
@@ -180,7 +180,7 @@ describe("MesosStateUtil", function() {
   describe("#getPodHistoricalInstances", function() {
     const state = MESOS_STATE_WITH_HISTORY;
 
-    it("should correctly return only pod-related tasks", function() {
+    it("returns only pod-related tasks", function() {
       const pod = new Pod({ id: "/pod-p0" });
       const instances = MesosStateUtil.getPodHistoricalInstances(state, pod);
 
@@ -189,7 +189,7 @@ describe("MesosStateUtil", function() {
       expect(instances[1].id).toEqual("pod-p0.instance-inst-a2");
     });
 
-    it("should add `containerID` property on containers", function() {
+    it("adds `containerID` property on containers", function() {
       const pod = new Pod({ id: "/pod-p1" });
       const instances = MesosStateUtil.getPodHistoricalInstances(state, pod);
 
@@ -198,28 +198,28 @@ describe("MesosStateUtil", function() {
       );
     });
 
-    it("should add `status` property on containers", function() {
+    it("adds `status` property on containers", function() {
       const pod = new Pod({ id: "/pod-p1" });
       const instances = MesosStateUtil.getPodHistoricalInstances(state, pod);
 
       expect(instances[0].containers[0].status).toEqual("TASK_FINISHED");
     });
 
-    it("should add `lastChanged` property on containers", function() {
+    it("adds `lastChanged` property on containers", function() {
       const pod = new Pod({ id: "/pod-p1" });
       const instances = MesosStateUtil.getPodHistoricalInstances(state, pod);
 
       expect(instances[0].containers[0].lastChanged).toEqual(1008 * 1000);
     });
 
-    it("should add `lastUpdated` property on containers", function() {
+    it("adds `lastUpdated` property on containers", function() {
       const pod = new Pod({ id: "/pod-p1" });
       const instances = MesosStateUtil.getPodHistoricalInstances(state, pod);
 
       expect(instances[0].containers[0].lastUpdated).toEqual(1008 * 1000);
     });
 
-    it("should correctly summarize resources", function() {
+    it("summarizes resources", function() {
       const pod = new Pod({ id: "/pod-p0" });
       const instances = MesosStateUtil.getPodHistoricalInstances(state, pod);
 
@@ -238,7 +238,7 @@ describe("MesosStateUtil", function() {
       });
     });
 
-    it("should pick the latest timestamp for lastChanged", function() {
+    it("picks the latest timestamp for lastChanged", function() {
       const pod = new Pod({ id: "/pod-p0" });
       const instances = MesosStateUtil.getPodHistoricalInstances(state, pod);
 
@@ -251,19 +251,19 @@ describe("MesosStateUtil", function() {
   });
 
   describe("#isPodTaskId", function() {
-    it("should correctly match pod (PodDefinition) task ID", function() {
+    it("matches pod (PodDefinition) task ID", function() {
       expect(
         MesosStateUtil.isPodTaskId("podname.instance-instancename.taskname")
       ).toBeTruthy();
     });
 
-    it("should not match marathon (AppDefinition) task ID", function() {
+    it("does not match marathon (AppDefinition) task ID", function() {
       expect(
         MesosStateUtil.isPodTaskId("podname.marathon-instancename.taskname")
       ).toBeFalsy();
     });
 
-    it("should not match anything else that looks close", function() {
+    it("does not match anything else that looks close", function() {
       expect(
         MesosStateUtil.isPodTaskId("podname.marathon-instancename")
       ).toBeFalsy();
@@ -284,7 +284,7 @@ describe("MesosStateUtil", function() {
   });
 
   describe("#decomposePodTaskId", function() {
-    it("should correctly de-compose", function() {
+    it("de-scompose", function() {
       expect(
         MesosStateUtil.decomposePodTaskId(
           "podname.instance-instancename.taskname"
