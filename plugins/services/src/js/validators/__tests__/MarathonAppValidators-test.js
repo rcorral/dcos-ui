@@ -19,6 +19,7 @@ const CMDORDOCKERIMAGE_ERRORS = [
     path: ["cmd"],
     message: "You must specify a command, an argument or a container",
     type: "PROP_MISSING_ONE",
+    unanchored: true,
     variables: {
       names: "cmd, args, container.docker.image"
     }
@@ -27,6 +28,7 @@ const CMDORDOCKERIMAGE_ERRORS = [
     path: ["args"],
     message: "You must specify a command, an argument or a container",
     type: "PROP_MISSING_ONE",
+    unanchored: true,
     variables: {
       names: "cmd, args, container.docker.image"
     }
@@ -35,6 +37,7 @@ const CMDORDOCKERIMAGE_ERRORS = [
     path: ["container", "docker", "image"],
     message: "You must specify a command, an argument or a container",
     type: "PROP_MISSING_ONE",
+    unanchored: true,
     variables: {
       names: "cmd, args, container.docker.image"
     }
@@ -46,6 +49,7 @@ const COMPLYWITHRESIDENCY_ERRORS = [
     path: ["residency"],
     message: "AppDefinition must contain persistent volumes and define residency",
     type: "PROP_MISSING_ALL",
+    unanchored: true,
     variables: {
       names: "residency, container.volumes"
     }
@@ -54,6 +58,7 @@ const COMPLYWITHRESIDENCY_ERRORS = [
     path: ["container", "volumes"],
     message: "AppDefinition must contain persistent volumes and define residency",
     type: "PROP_MISSING_ALL",
+    unanchored: true,
     variables: {
       names: "residency, container.volumes"
     }
@@ -74,6 +79,7 @@ const NOTBOTHCMDARGS_ERRORS = [
     path: ["cmd"],
     message: "Please specify only one of `cmd` or `args`",
     type: "PROP_CONFLICT",
+    unanchored: true,
     variables: {
       feature1: "cmd",
       feature2: "args"
@@ -83,6 +89,7 @@ const NOTBOTHCMDARGS_ERRORS = [
     path: ["args"],
     message: "Please specify only one of `cmd` or `args`",
     type: "PROP_CONFLICT",
+    unanchored: true,
     variables: {
       feature1: "cmd",
       feature2: "args"

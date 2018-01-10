@@ -33,14 +33,15 @@ const MarathonAppValidators = {
     if (hasCmd && hasArgs) {
       const notBothMessage = "Please specify only one of `cmd` or `args`";
       const type = PROP_CONFLICT;
+      const unanchored = true;
       const variables = {
         feature1: "cmd",
         feature2: "args"
       };
 
       return [
-        { path: ["cmd"], message: notBothMessage, type, variables },
-        { path: ["args"], message: notBothMessage, type, variables }
+        { path: ["cmd"], message: notBothMessage, type, unanchored, variables },
+        { path: ["args"], message: notBothMessage, type, unanchored, variables }
       ];
     }
 
@@ -86,11 +87,18 @@ const MarathonAppValidators = {
     const variables = {
       names: "cmd, args, container.docker.image"
     };
+    const unanchored = true;
 
     return [
-      { path: ["cmd"], message, type, variables },
-      { path: ["args"], message, type, variables },
-      { path: ["container", "docker", "image"], message, type, variables }
+      { path: ["cmd"], message, type, unanchored, variables },
+      { path: ["args"], message, type, unanchored, variables },
+      {
+        path: ["container", "docker", "image"],
+        message,
+        type,
+        unanchored,
+        variables
+      }
     ];
   },
 
@@ -117,10 +125,11 @@ const MarathonAppValidators = {
       const variables = {
         names: "residency, container.volumes"
       };
+      const unanchored = true;
 
       return [
-        { path: ["residency"], message, type, variables },
-        { path: ["container", "volumes"], message, type, variables }
+        { path: ["residency"], message, type, unanchored, variables },
+        { path: ["container", "volumes"], message, type, unanchored, variables }
       ];
     }
 
